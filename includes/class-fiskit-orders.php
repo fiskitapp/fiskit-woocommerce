@@ -61,6 +61,18 @@ class Fiskit_Orders {
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 		add_action( 'admin_post_fiskit_pdf', array( $this, 'admin_pdf' ) );
 
+		// Orders list: an Invoice column and a bulk action, on the HPOS screen and the legacy one
+		foreach ( array( 'woocommerce_page_wc-orders', 'edit-shop_order' ) as $screen ) {
+			add_filter( "bulk_actions-{$screen}", array( $this, 'bulk_actions' ) );
+			add_filter( "handle_bulk_actions-{$screen}", array( $this, 'handle_bulk_action' ), 10, 3 );
+		}
+		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'add_column' ) );
+		add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'render_column' ), 10, 2 );
+		add_filter( 'manage_edit-shop_order_columns', array( $this, 'add_column' ) );
+		add_action( 'manage_shop_order_posts_custom_column', array( $this, 'render_column' ), 10, 2 );
+		add_action( 'admin_notices', array( $this, 'bulk_notice' ) );
+
+		add_action( 'woocommerce_email_after_order_table', array( $this, 'email_link' ), 10, 3 );
 		add_action( 'woocommerce_order_details_after_order_table', array( $this, 'customer_link' ) );
 		add_filter( 'woocommerce_my_account_my_orders_actions', array( $this, 'my_orders_action' ), 10, 2 );
 		add_action( 'template_redirect', array( $this, 'customer_pdf' ) );
@@ -376,6 +388,148 @@ class Fiskit_Orders {
 		$this->issue_invoice( $order->get_id(), 0 );
 	}
 
+	/**
+	 * @param array $actions Bulk actions of the orders list.
+	 */
+	public function bulk_actions( $actions ) {
+		if ( $this->active() ) {
+			$actions['fiskit_issue'] = __( 'Issue FisKit invoices', 'fiskit-for-woocommerce' );
+		}
+		return $actions;
+	}
+
+	/**
+	 * Queues the invoice of every selected paid order that has none, including those that failed.
+	 *
+	 * @param string $redirect_to Where to go afterwards.
+	 * @param string $action      Chosen bulk action.
+	 * @param array  $ids         Selected orders.
+	 */
+	public function handle_bulk_action( $redirect_to, $action, $ids ) {
+		if ( 'fiskit_issue' !== $action || ! $this->active() ) {
+			return $redirect_to;
+		}
+		$queued = 0;
+		$paid   = 'completed' === $this->settings->get_option( 'trigger' ) ? array( 'completed' ) : array( 'processing', 'completed' );
+		foreach ( array_map( 'absint', (array) $ids ) as $id ) {
+			$order = wc_get_order( $id );
+			if ( ! $order || ! $order->has_status( $paid ) || in_array( $order->get_meta( self::META_STATUS ), array( 'authorized', 'pending' ), true ) ) {
+				continue;
+			}
+			$order->delete_meta_data( self::META_STATUS );
+			$order->delete_meta_data( self::META_ERROR );
+			$order->delete_meta_data( self::META_REQUEST );
+			$order->save();
+			$this->schedule( self::ISSUE_HOOK, array( $id, 0 ) );
+			++$queued;
+		}
+		return add_query_arg(
+			array(
+				'fiskit_queued'  => $queued,
+				'fiskit_skipped' => count( (array) $ids ) - $queued,
+			),
+			$redirect_to
+		);
+	}
+
+	public function bulk_notice() {
+		if ( ! isset( $_GET['fiskit_queued'] ) ) {
+			return;
+		}
+		$queued  = absint( $_GET['fiskit_queued'] );
+		$skipped = isset( $_GET['fiskit_skipped'] ) ? absint( $_GET['fiskit_skipped'] ) : 0;
+		$message = sprintf(
+			/* translators: %d: number of orders. */
+			_n( '%d invoice is being issued in the background.', '%d invoices are being issued in the background.', $queued, 'fiskit-for-woocommerce' ),
+			$queued
+		);
+		if ( $skipped ) {
+			$message .= ' ' . sprintf(
+				/* translators: %d: number of orders. */
+				_n( '%d order skipped: already invoiced or not paid.', '%d orders skipped: already invoiced or not paid.', $skipped, 'fiskit-for-woocommerce' ),
+				$skipped
+			);
+		}
+		printf( '<div class="notice notice-success is-dismissible"><p>%s</p></div>', esc_html( $message ) );
+	}
+
+	/**
+	 * @param array $columns Orders list columns.
+	 */
+	public function add_column( $columns ) {
+		$result = array();
+		foreach ( $columns as $key => $label ) {
+			$result[ $key ] = $label;
+			// Right after the order total, or at the end if the list has no total column
+			if ( 'order_total' === $key ) {
+				$result['fiskit_invoice'] = __( 'Invoice', 'fiskit-for-woocommerce' );
+			}
+		}
+		if ( ! isset( $result['fiskit_invoice'] ) ) {
+			$result['fiskit_invoice'] = __( 'Invoice', 'fiskit-for-woocommerce' );
+		}
+		return $result;
+	}
+
+	/**
+	 * @param string       $column        Column being rendered.
+	 * @param int|WC_Order $order_or_id   The row's order (HPOS) or its post id (legacy).
+	 */
+	public function render_column( $column, $order_or_id ) {
+		if ( 'fiskit_invoice' !== $column ) {
+			return;
+		}
+		$order  = $order_or_id instanceof WC_Order ? $order_or_id : wc_get_order( $order_or_id );
+		$status = $order ? $order->get_meta( self::META_STATUS ) : '';
+		if ( 'authorized' === $status ) {
+			echo esc_html( self::voucher_label( $order ) );
+			if ( 'yes' !== $order->get_meta( self::META_LIVE ) ) {
+				echo ' <em>' . esc_html__( '(test)', 'fiskit-for-woocommerce' ) . '</em>';
+			}
+		} elseif ( 'pending' === $status ) {
+			echo '<span style="color:#996800">' . esc_html__( 'Being issued', 'fiskit-for-woocommerce' ) . '</span>';
+		} elseif ( 'error' === $status ) {
+			printf(
+				'<span style="color:#b32d2e" title="%1$s">%2$s</span>',
+				esc_attr( $order->get_meta( self::META_ERROR ) ),
+				esc_html__( 'Error', 'fiskit-for-woocommerce' )
+			);
+		} else {
+			echo '<span aria-hidden="true">–</span>';
+		}
+	}
+
+	/**
+	 * Customer emails carry a link to the invoice. The email of a just-paid order goes out before ARCA
+	 * answers, so the link is added as soon as the order will be invoiced; if it is opened too early, the
+	 * page says the invoice is still being issued.
+	 *
+	 * @param WC_Order $order         The order in the email.
+	 * @param bool     $sent_to_admin Whether the email goes to the shop.
+	 * @param bool     $plain_text    Plain text or HTML email.
+	 */
+	public function email_link( $order, $sent_to_admin = false, $plain_text = false ) {
+		if ( $sent_to_admin || ! $order instanceof WC_Order || ! $this->active() ) {
+			return;
+		}
+		$status = $order->get_meta( self::META_STATUS );
+		$paid   = 'completed' === $this->settings->get_option( 'trigger' ) ? array( 'completed' ) : array( 'processing', 'completed' );
+		if ( 'error' === $status || ( '' === $status && ! $order->has_status( $paid ) ) ) {
+			return;
+		}
+		$url  = $this->customer_pdf_url( $order );
+		$text = __( 'Download your invoice', 'fiskit-for-woocommerce' );
+		if ( $plain_text ) {
+			echo "\n" . esc_html( $text ) . ': ' . esc_url_raw( $url ) . "\n\n";
+			return;
+		}
+		printf(
+			'<p style="margin:16px 0"><a href="%1$s" style="font-weight:bold">%2$s</a></p>',
+			esc_url( $url ),
+			esc_html( $text )
+		);
+	}
+
 	public function add_meta_box() {
 		$screens = array( 'shop_order' );
 		if ( function_exists( 'wc_get_page_screen_id' ) ) {
@@ -495,6 +649,14 @@ class Fiskit_Orders {
 		$key   = sanitize_text_field( wp_unslash( $_GET['key'] ) );
 		if ( ! $order || ! $order instanceof WC_Order || ! hash_equals( $order->get_order_key(), $key ) ) {
 			wp_die( esc_html__( 'Invoice not found.', 'fiskit-for-woocommerce' ), 404 );
+		}
+		if ( 'authorized' !== $order->get_meta( self::META_STATUS ) && 'error' !== $order->get_meta( self::META_STATUS ) ) {
+			// Linked from the order email before ARCA answered: not an error, just early
+			wp_die(
+				esc_html__( 'Your invoice is still being issued. Try again in a few minutes.', 'fiskit-for-woocommerce' ),
+				esc_html__( 'Invoice', 'fiskit-for-woocommerce' ),
+				array( 'response' => 200 )
+			);
 		}
 		$this->stream_pdf( $order );
 	}

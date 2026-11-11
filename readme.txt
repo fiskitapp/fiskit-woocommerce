@@ -6,7 +6,7 @@ Tested up to: 6.8
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 11.2
-Stable tag: 0.1.2
+Stable tag: 0.1.3
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -51,6 +51,11 @@ The plugin retries in the background with the same idempotency key, so the invoi
 Only orders in Argentine pesos (ARS) are invoiced.
 
 == Changelog ==
+
+= 0.1.3 =
+* Invoice column in the orders list.
+* Bulk action to issue the invoices of several paid orders, including those that failed.
+* The customer emails link to the invoice; opened too early, the page says it is still being issued.
 
 = 0.1.2 =
 * The API key is checked when the settings are saved, and the connection mode (test or live) is shown.
