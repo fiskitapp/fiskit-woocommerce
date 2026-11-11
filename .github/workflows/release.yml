@@ -1,0 +1,26 @@
+# Runs in the public repository (FidelGenre/fiskit-woocommerce), which receives this folder as a mirror.
+# Every version tag (v0.1.0...) gets a release with the installable zip: Plugins → Add New → Upload Plugin.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # The plugin header and the tag must agree: v0.1.0 releases version 0.1.0
+      - run: grep -q "Version: *${GITHUB_REF_NAME#v}$" fiskit-for-woocommerce.php
+      # WordPress identifies the plugin by its folder, so it must keep the same name in every version
+      - run: |
+          mkdir -p build/fiskit-for-woocommerce
+          cp -r fiskit-for-woocommerce.php includes languages readme.txt README.md LICENSE build/fiskit-for-woocommerce/
+          cd build && zip -qr ../fiskit-for-woocommerce.zip fiskit-for-woocommerce
+      - run: gh release create "$GITHUB_REF_NAME" fiskit-for-woocommerce.zip --title "$GITHUB_REF_NAME" --notes "Install it from WordPress: Plugins → Add New → Upload Plugin. / Instalalo desde WordPress: Plugins → Añadir nuevo → Subir plugin."
+        env:
+          GH_TOKEN: ${{ github.token }}
