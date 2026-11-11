@@ -1,0 +1,302 @@
+# Copyright (C) 2026 FisKit
+# This file is distributed under the MIT.
+msgid ""
+msgstr ""
+"Project-Id-Version: FisKit for WooCommerce 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fiskit-for-woocommerce\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-11T09:28:05+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: fiskit-for-woocommerce\n"
+
+#. Plugin Name of the plugin
+#: fiskit-for-woocommerce.php
+msgid "FisKit for WooCommerce"
+msgstr "FisKit para WooCommerce"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: fiskit-for-woocommerce.php
+msgid "https://fiskit.com.ar"
+msgstr "https://fiskit.com.ar"
+
+#. Description of the plugin
+#: fiskit-for-woocommerce.php
+msgid "Issues the ARCA (ex AFIP) electronic invoice of every paid order and a credit note for every refund. The customer gets the PDF by email."
+msgstr "Emite la factura electrónica de ARCA (ex AFIP) de cada pedido pagado y una nota de crédito por cada reembolso. El cliente recibe el PDF por email."
+
+#. Author of the plugin
+#: fiskit-for-woocommerce.php
+msgid "FisKit"
+msgstr "FisKit"
+
+#: fiskit-for-woocommerce.php:52
+msgid "FisKit for WooCommerce needs WooCommerce to be active."
+msgstr "FisKit para WooCommerce necesita que WooCommerce esté activo."
+
+#: fiskit-for-woocommerce.php:87
+msgid "Settings"
+msgstr "Ajustes"
+
+#: includes/class-fiskit-integration.php:18
+msgid "Issues the ARCA electronic invoice of every paid order, and a credit note for every refund. Create your key in the FisKit dashboard, under API Keys."
+msgstr "Emite la factura electrónica de ARCA de cada pedido pagado y una nota de crédito por cada reembolso. Creá tu clave en el panel de FisKit, en Claves de API."
+
+#: includes/class-fiskit-integration.php:29
+msgid "Invoicing"
+msgstr "Facturación"
+
+#: includes/class-fiskit-integration.php:31
+msgid "Issue the invoices automatically"
+msgstr "Emitir las facturas automáticamente"
+
+#: includes/class-fiskit-integration.php:35
+msgid "API key"
+msgstr "Clave de API"
+
+#: includes/class-fiskit-integration.php:37
+msgid "sk_test_... issues test invoices without fiscal validity; sk_live_... issues real invoices. Start with a test key."
+msgstr "sk_test_... emite facturas de prueba, sin validez fiscal; sk_live_... emite facturas reales. Empezá con una clave de prueba."
+
+#: includes/class-fiskit-integration.php:41
+msgid "Your tax status"
+msgstr "Tu condición fiscal"
+
+#: includes/class-fiskit-integration.php:44
+msgid "Monotributista: Invoice C"
+msgstr "Monotributista: Factura C"
+
+#: includes/class-fiskit-integration.php:45
+msgid "Registered VAT taxpayer: Invoice A or B"
+msgstr "Responsable inscripto: Factura A o B"
+
+#: includes/class-fiskit-integration.php:47
+msgid "As a registered VAT taxpayer, customers who enter the CUIT of another registered taxpayer get Invoice A; everyone else gets Invoice B."
+msgstr "Como responsable inscripto, el cliente que carga el CUIT de otro responsable inscripto recibe Factura A; el resto, Factura B."
+
+#: includes/class-fiskit-integration.php:51
+msgid "VAT rate"
+msgstr "Alícuota de IVA"
+
+#: includes/class-fiskit-integration.php:61
+msgid "Only for Invoices A and B: the order total includes it."
+msgstr "Solo para facturas A y B: el total del pedido lo incluye."
+
+#: includes/class-fiskit-integration.php:65
+msgid "You sell"
+msgstr "Vendés"
+
+#: includes/class-fiskit-integration.php:68
+msgid "Products"
+msgstr "Productos"
+
+#: includes/class-fiskit-integration.php:69
+msgid "Services"
+msgstr "Servicios"
+
+#: includes/class-fiskit-integration.php:70
+msgid "Products and services"
+msgstr "Productos y servicios"
+
+#: includes/class-fiskit-integration.php:75
+msgid "Point of sale"
+msgstr "Punto de venta"
+
+#: includes/class-fiskit-integration.php:77
+msgid "Empty: the one set in the FisKit dashboard."
+msgstr "Vacío: el que elegiste en el panel de FisKit."
+
+#: includes/class-fiskit-integration.php:82
+msgid "Invoice when the order is"
+msgstr "Facturar cuando el pedido está"
+
+#: includes/class-fiskit-integration.php:85
+msgid "Paid (Processing)"
+msgstr "Pagado (Procesando)"
+
+#: includes/class-fiskit-integration.php:86
+msgid "Completed"
+msgstr "Completado"
+
+#: includes/class-fiskit-integration.php:91
+msgid "Email"
+msgstr "Email"
+
+#: includes/class-fiskit-integration.php:93
+msgid "Email the invoice PDF to the customer"
+msgstr "Mandarle al cliente el PDF de la factura por email"
+
+#: includes/class-fiskit-integration.php:97
+msgid "Checkout"
+msgstr "Checkout"
+
+#: includes/class-fiskit-integration.php:99
+msgid "Ask for the CUIT or DNI (optional for the customer)"
+msgstr "Pedir CUIT o DNI (opcional para el cliente)"
+
+#: includes/class-fiskit-integration.php:103
+msgid "Refunds"
+msgstr "Reembolsos"
+
+#: includes/class-fiskit-integration.php:105
+msgid "Issue a credit note for every refund"
+msgstr "Emitir una nota de crédito por cada reembolso"
+
+#: includes/class-fiskit-integration.php:120
+msgid "The API key must start with sk_test_ or sk_live_."
+msgstr "La clave de API tiene que empezar con sk_test_ o sk_live_."
+
+#. translators: %s: order number.
+#: includes/class-fiskit-invoice-builder.php:105
+#, php-format
+msgid "Order #%s"
+msgstr "Pedido #%s"
+
+#. translators: %s: refund reason.
+#: includes/class-fiskit-invoice-builder.php:133
+#, php-format
+msgid "Refund: %s"
+msgstr "Reembolso: %s"
+
+#: includes/class-fiskit-invoice-builder.php:134
+msgid "Refund"
+msgstr "Reembolso"
+
+#: includes/class-fiskit-orders.php:113
+msgid "Only orders in Argentine pesos are invoiced."
+msgstr "Solo se facturan pedidos en pesos argentinos."
+
+#: includes/class-fiskit-orders.php:117
+msgid "FisKit: the order total is zero, there is nothing to invoice."
+msgstr "FisKit: el total del pedido es cero, no hay nada para facturar."
+
+#: includes/class-fiskit-orders.php:155
+msgid "FisKit: the refund has no credit note because the order has no authorized invoice."
+msgstr "FisKit: el reembolso no tiene nota de crédito porque el pedido no tiene una factura autorizada."
+
+#. translators: 1: voucher, for example "Invoice C 0001-00000042"; 2: CAE. 3: "(test)" or empty.
+#: includes/class-fiskit-orders.php:235
+#, php-format
+msgid "FisKit: %1$s authorized by ARCA, CAE %2$s %3$s"
+msgstr "FisKit: %1$s autorizada por ARCA, CAE %2$s %3$s"
+
+#: includes/class-fiskit-orders.php:238
+msgid "(test, no fiscal validity)"
+msgstr "(prueba, sin validez fiscal)"
+
+#: includes/class-fiskit-orders.php:248
+msgid "FisKit: ARCA is slow to answer. The voucher is issued in the background and will show up here."
+msgstr "FisKit: ARCA está tardando en responder. El comprobante se emite en segundo plano y va a aparecer acá."
+
+#: includes/class-fiskit-orders.php:260
+msgid "ARCA did not authorize the voucher."
+msgstr "ARCA no autorizó el comprobante."
+
+#. translators: %s: why it failed.
+#: includes/class-fiskit-orders.php:286
+#, php-format
+msgid "FisKit: the voucher could not be issued. %s"
+msgstr "FisKit: no se pudo emitir el comprobante. %s"
+
+#. translators: %s: the CUIT.
+#: includes/class-fiskit-orders.php:309
+#, php-format
+msgid "FisKit: the CUIT %s is not in the ARCA registry; invoiced to a final consumer."
+msgstr "FisKit: el CUIT %s no está en el padrón de ARCA; se facturó a consumidor final."
+
+#: includes/class-fiskit-orders.php:361
+msgid "Issue the FisKit invoice"
+msgstr "Emitir la factura con FisKit"
+
+#: includes/class-fiskit-orders.php:383
+msgid "ARCA invoice"
+msgstr "Factura de ARCA"
+
+#: includes/class-fiskit-orders.php:411
+msgid "Not invoiced yet. It is issued automatically when the order is paid."
+msgstr "Todavía sin facturar. Se emite sola cuando se paga el pedido."
+
+#: includes/class-fiskit-orders.php:411
+msgid "Set your FisKit API key in WooCommerce → Settings → Integration."
+msgstr "Cargá tu clave de FisKit en WooCommerce → Ajustes → Integración."
+
+#: includes/class-fiskit-orders.php:415
+msgid "Being issued: ARCA is slow to answer."
+msgstr "Emitiéndose: ARCA está tardando en responder."
+
+#: includes/class-fiskit-orders.php:421
+msgid "Fix it and choose \"Issue the FisKit invoice\" in the order actions."
+msgstr "Corregilo y elegí \"Emitir la factura con FisKit\" en las acciones del pedido."
+
+#: includes/class-fiskit-orders.php:438
+msgid "(test)"
+msgstr "(prueba)"
+
+#: includes/class-fiskit-orders.php:441
+msgid "Download PDF"
+msgstr "Descargar PDF"
+
+#: includes/class-fiskit-orders.php:449
+msgid "You are not allowed to see this invoice."
+msgstr "No tenés permiso para ver esta factura."
+
+#. translators: %s: voucher, for example "Invoice C 0001-00000042".
+#: includes/class-fiskit-orders.php:467
+#, php-format
+msgid "Download %s"
+msgstr "Descargar %s"
+
+#: includes/class-fiskit-orders.php:479
+msgid "Invoice"
+msgstr "Factura"
+
+#: includes/class-fiskit-orders.php:495
+#: includes/class-fiskit-orders.php:512
+msgid "Invoice not found."
+msgstr "Factura no encontrada."
+
+#: includes/class-fiskit-orders.php:536
+msgid "CUIT or DNI"
+msgstr "CUIT o DNI"
+
+#: includes/class-fiskit-orders.php:537
+msgid "Optional, for the invoice"
+msgstr "Opcional, para la factura"
+
+#: includes/class-fiskit-orders.php:569
+#: includes/class-fiskit-orders.php:570
+msgid "CUIT or DNI (optional, for the invoice)"
+msgstr "CUIT o DNI (opcional, para la factura)"
+
+#: includes/class-fiskit-orders.php:590
+msgid "Enter a CUIT (11 digits) or a DNI (7 or 8 digits)."
+msgstr "Ingresá un CUIT (11 dígitos) o un DNI (7 u 8 dígitos)."
+
+#: includes/class-fiskit-orders.php:593
+msgid "The CUIT is not valid: check its digits."
+msgstr "El CUIT no es válido: revisá los números."
+
+#. translators: %s: letter A, B or C.
+#: includes/class-fiskit-orders.php:620
+#, php-format
+msgid "Invoice %s"
+msgstr "Factura %s"
+
+#. translators: %s: letter A, B or C.
+#: includes/class-fiskit-orders.php:622
+#, php-format
+msgid "Credit note %s"
+msgstr "Nota de crédito %s"
+
+#. translators: %s: letter A, B or C.
+#: includes/class-fiskit-orders.php:624
+#, php-format
+msgid "Debit note %s"
+msgstr "Nota de débito %s"
