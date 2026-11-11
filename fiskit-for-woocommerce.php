@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name:          FisKit for WooCommerce
- * Plugin URI:           https://fiskit.com.ar
+ * Plugin URI:           https://github.com/fiskitapp/fiskit-woocommerce
  * Description:          Issues the ARCA (ex AFIP) electronic invoice of every paid order and a credit note for every refund. The customer gets the PDF by email.
- * Version:              0.1.3
+ * Version:              0.1.4
  * Requires at least:    6.2
  * Requires PHP:         7.4
  * Requires Plugins:     woocommerce
@@ -21,7 +21,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FISKIT_WC_VERSION', '0.1.3' );
+define( 'FISKIT_WC_VERSION', '0.1.4' );
 define( 'FISKIT_WC_FILE', __FILE__ );
 
 // Compatible with High-Performance Order Storage and with the block checkout
