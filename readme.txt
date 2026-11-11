@@ -6,7 +6,7 @@ Tested up to: 6.8
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 11.2
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -51,6 +51,9 @@ The plugin retries in the background with the same idempotency key, so the invoi
 Only orders in Argentine pesos (ARS) are invoiced.
 
 == Changelog ==
+
+= 0.1.1 =
+* The plugin now lives in the fiskitapp organization on GitHub.
 
 = 0.1.0 =
 * First release.
