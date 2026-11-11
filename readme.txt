@@ -6,7 +6,7 @@ Tested up to: 6.8
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 11.2
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -51,6 +51,11 @@ The plugin retries in the background with the same idempotency key, so the invoi
 Only orders in Argentine pesos (ARS) are invoiced.
 
 == Changelog ==
+
+= 0.1.2 =
+* The API key is checked when the settings are saved, and the connection mode (test or live) is shown.
+* The VAT rate is only shown to registered VAT taxpayers.
+* Notice about not connecting Mercado Pago in FisKit as well, to avoid invoicing twice.
 
 = 0.1.1 =
 * The plugin now lives in the fiskitapp organization on GitHub.

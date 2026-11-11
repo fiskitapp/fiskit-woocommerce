@@ -15,7 +15,9 @@ class Fiskit_Integration extends WC_Integration {
 	public function __construct() {
 		$this->id                 = 'fiskit';
 		$this->method_title       = 'FisKit';
-		$this->method_description = __( 'Issues the ARCA electronic invoice of every paid order, and a credit note for every refund. Create your key in the FisKit dashboard, under API Keys.', 'fiskit-for-woocommerce' );
+		$this->method_description = __( 'Issues the ARCA electronic invoice of every paid order, and a credit note for every refund. Create your key in the FisKit dashboard, under API Keys.', 'fiskit-for-woocommerce' )
+			. '<br><br><strong>' . __( 'Mercado Pago:', 'fiskit-for-woocommerce' ) . '</strong> '
+			. __( 'orders paid with Mercado Pago are already invoiced by this plugin. Do not also connect Mercado Pago in the FisKit dashboard, or those sales will be invoiced twice.', 'fiskit-for-woocommerce' );
 
 		$this->init_form_fields();
 		$this->init_settings();
@@ -105,6 +107,52 @@ class Fiskit_Integration extends WC_Integration {
 				'label'   => __( 'Issue a credit note for every refund', 'fiskit-for-woocommerce' ),
 				'default' => 'yes',
 			),
+		);
+	}
+
+	/**
+	 * Saves the settings and checks the key against the API, so a wrong key shows up here and not at the
+	 * first sale.
+	 */
+	public function process_admin_options() {
+		$saved = parent::process_admin_options();
+		$key   = (string) $this->get_option( 'api_key' );
+		if ( '' === $key ) {
+			return $saved;
+		}
+		$api   = new Fiskit_Api( $key );
+		$check = $api->check_key();
+		if ( is_wp_error( $check ) && in_array( $check->get_error_code(), array( 'api_key_invalid', 'api_key_missing' ), true ) ) {
+			WC_Admin_Settings::add_error( __( 'FisKit did not accept the API key: it is wrong, was revoked or expired. Copy it again from the FisKit dashboard.', 'fiskit-for-woocommerce' ) );
+		} elseif ( is_wp_error( $check ) ) {
+			WC_Admin_Settings::add_error(
+				/* translators: %s: error from the API. */
+				sprintf( __( 'FisKit did not accept the API key: %s', 'fiskit-for-woocommerce' ), $check->get_error_message() )
+			);
+		} else {
+			WC_Admin_Settings::add_message(
+				$api->is_live()
+					? __( 'Connected to FisKit in LIVE mode: paid orders will get real invoices.', 'fiskit-for-woocommerce' )
+					: __( 'Connected to FisKit in test mode: invoices have no fiscal validity.', 'fiskit-for-woocommerce' )
+			);
+		}
+		return $saved;
+	}
+
+	/**
+	 * The settings form, plus a small script: the VAT rate only applies to registered VAT taxpayers.
+	 */
+	public function admin_options() {
+		parent::admin_options();
+		$issuer = esc_js( $this->get_field_key( 'issuer' ) );
+		$rate   = esc_js( $this->get_field_key( 'vat_rate' ) );
+		wc_enqueue_js(
+			"jQuery( function ( $ ) {
+				var issuer = $( '#{$issuer}' ), row = $( '#{$rate}' ).closest( 'tr' );
+				function sync() { row.toggle( issuer.val() === 'registered' ); }
+				issuer.on( 'change', sync );
+				sync();
+			} );"
 		);
 	}
 

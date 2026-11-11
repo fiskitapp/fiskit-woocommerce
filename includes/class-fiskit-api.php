@@ -76,6 +76,20 @@ class Fiskit_Api {
 		return $this->request( 'GET', '/v1/taxpayers/' . rawurlencode( (string) $cuit ) );
 	}
 
+	/**
+	 * Checks the key against the API without issuing anything: looking up an invoice that cannot exist
+	 * answers 404 to a valid key and 401 to an invalid one.
+	 *
+	 * @return true|WP_Error
+	 */
+	public function check_key() {
+		$result = $this->get_invoice( '00000000-0000-0000-0000-000000000000' );
+		if ( is_wp_error( $result ) && 'resource_missing' !== $result->get_error_code() ) {
+			return $result;
+		}
+		return true;
+	}
+
 	private function request( $method, $path, $body = null, $idempotency_key = null, $binary = false ) {
 		$headers = array(
 			'Authorization' => 'Bearer ' . $this->api_key,

@@ -2,7 +2,7 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: FisKit for WooCommerce 0.1.0\n"
+"Project-Id-Version: FisKit for WooCommerce 0.1.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fiskit-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-11T09:28:05+00:00\n"
+"POT-Creation-Date: 2026-11-11T20:47:29+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: fiskit-for-woocommerce\n"
@@ -49,107 +49,133 @@ msgstr "Ajustes"
 msgid "Issues the ARCA electronic invoice of every paid order, and a credit note for every refund. Create your key in the FisKit dashboard, under API Keys."
 msgstr "Emite la factura electrónica de ARCA de cada pedido pagado y una nota de crédito por cada reembolso. Creá tu clave en el panel de FisKit, en Claves de API."
 
-#: includes/class-fiskit-integration.php:29
+#: includes/class-fiskit-integration.php:19
+msgid "Mercado Pago:"
+msgstr "Mercado Pago:"
+
+#: includes/class-fiskit-integration.php:20
+msgid "orders paid with Mercado Pago are already invoiced by this plugin. Do not also connect Mercado Pago in the FisKit dashboard, or those sales will be invoiced twice."
+msgstr "los pedidos pagados con Mercado Pago ya los factura este plugin. No conectes además Mercado Pago en el panel de FisKit, o esas ventas se van a facturar dos veces."
+
+#: includes/class-fiskit-integration.php:31
 msgid "Invoicing"
 msgstr "Facturación"
 
-#: includes/class-fiskit-integration.php:31
+#: includes/class-fiskit-integration.php:33
 msgid "Issue the invoices automatically"
 msgstr "Emitir las facturas automáticamente"
 
-#: includes/class-fiskit-integration.php:35
+#: includes/class-fiskit-integration.php:37
 msgid "API key"
 msgstr "Clave de API"
 
-#: includes/class-fiskit-integration.php:37
+#: includes/class-fiskit-integration.php:39
 msgid "sk_test_... issues test invoices without fiscal validity; sk_live_... issues real invoices. Start with a test key."
 msgstr "sk_test_... emite facturas de prueba, sin validez fiscal; sk_live_... emite facturas reales. Empezá con una clave de prueba."
 
-#: includes/class-fiskit-integration.php:41
+#: includes/class-fiskit-integration.php:43
 msgid "Your tax status"
 msgstr "Tu condición fiscal"
 
-#: includes/class-fiskit-integration.php:44
+#: includes/class-fiskit-integration.php:46
 msgid "Monotributista: Invoice C"
 msgstr "Monotributista: Factura C"
 
-#: includes/class-fiskit-integration.php:45
+#: includes/class-fiskit-integration.php:47
 msgid "Registered VAT taxpayer: Invoice A or B"
 msgstr "Responsable inscripto: Factura A o B"
 
-#: includes/class-fiskit-integration.php:47
+#: includes/class-fiskit-integration.php:49
 msgid "As a registered VAT taxpayer, customers who enter the CUIT of another registered taxpayer get Invoice A; everyone else gets Invoice B."
 msgstr "Como responsable inscripto, el cliente que carga el CUIT de otro responsable inscripto recibe Factura A; el resto, Factura B."
 
-#: includes/class-fiskit-integration.php:51
+#: includes/class-fiskit-integration.php:53
 msgid "VAT rate"
 msgstr "Alícuota de IVA"
 
-#: includes/class-fiskit-integration.php:61
+#: includes/class-fiskit-integration.php:63
 msgid "Only for Invoices A and B: the order total includes it."
 msgstr "Solo para facturas A y B: el total del pedido lo incluye."
 
-#: includes/class-fiskit-integration.php:65
+#: includes/class-fiskit-integration.php:67
 msgid "You sell"
 msgstr "Vendés"
 
-#: includes/class-fiskit-integration.php:68
+#: includes/class-fiskit-integration.php:70
 msgid "Products"
 msgstr "Productos"
 
-#: includes/class-fiskit-integration.php:69
+#: includes/class-fiskit-integration.php:71
 msgid "Services"
 msgstr "Servicios"
 
-#: includes/class-fiskit-integration.php:70
+#: includes/class-fiskit-integration.php:72
 msgid "Products and services"
 msgstr "Productos y servicios"
 
-#: includes/class-fiskit-integration.php:75
+#: includes/class-fiskit-integration.php:77
 msgid "Point of sale"
 msgstr "Punto de venta"
 
-#: includes/class-fiskit-integration.php:77
+#: includes/class-fiskit-integration.php:79
 msgid "Empty: the one set in the FisKit dashboard."
 msgstr "Vacío: el que elegiste en el panel de FisKit."
 
-#: includes/class-fiskit-integration.php:82
+#: includes/class-fiskit-integration.php:84
 msgid "Invoice when the order is"
 msgstr "Facturar cuando el pedido está"
 
-#: includes/class-fiskit-integration.php:85
+#: includes/class-fiskit-integration.php:87
 msgid "Paid (Processing)"
 msgstr "Pagado (Procesando)"
 
-#: includes/class-fiskit-integration.php:86
+#: includes/class-fiskit-integration.php:88
 msgid "Completed"
 msgstr "Completado"
 
-#: includes/class-fiskit-integration.php:91
+#: includes/class-fiskit-integration.php:93
 msgid "Email"
 msgstr "Email"
 
-#: includes/class-fiskit-integration.php:93
+#: includes/class-fiskit-integration.php:95
 msgid "Email the invoice PDF to the customer"
 msgstr "Mandarle al cliente el PDF de la factura por email"
 
-#: includes/class-fiskit-integration.php:97
+#: includes/class-fiskit-integration.php:99
 msgid "Checkout"
 msgstr "Checkout"
 
-#: includes/class-fiskit-integration.php:99
+#: includes/class-fiskit-integration.php:101
 msgid "Ask for the CUIT or DNI (optional for the customer)"
 msgstr "Pedir CUIT o DNI (opcional para el cliente)"
 
-#: includes/class-fiskit-integration.php:103
+#: includes/class-fiskit-integration.php:105
 msgid "Refunds"
 msgstr "Reembolsos"
 
-#: includes/class-fiskit-integration.php:105
+#: includes/class-fiskit-integration.php:107
 msgid "Issue a credit note for every refund"
 msgstr "Emitir una nota de crédito por cada reembolso"
 
-#: includes/class-fiskit-integration.php:120
+#: includes/class-fiskit-integration.php:126
+msgid "FisKit did not accept the API key: it is wrong, was revoked or expired. Copy it again from the FisKit dashboard."
+msgstr "FisKit no aceptó la clave de API: está mal, fue revocada o venció. Copiala de nuevo desde el panel de FisKit."
+
+#. translators: %s: error from the API.
+#: includes/class-fiskit-integration.php:130
+#, php-format
+msgid "FisKit did not accept the API key: %s"
+msgstr "FisKit no aceptó la clave de API: %s"
+
+#: includes/class-fiskit-integration.php:135
+msgid "Connected to FisKit in LIVE mode: paid orders will get real invoices."
+msgstr "Conectado a FisKit en modo REAL: los pedidos pagados reciben facturas reales."
+
+#: includes/class-fiskit-integration.php:136
+msgid "Connected to FisKit in test mode: invoices have no fiscal validity."
+msgstr "Conectado a FisKit en modo prueba: las facturas no tienen validez fiscal."
+
+#: includes/class-fiskit-integration.php:168
 msgid "The API key must start with sk_test_ or sk_live_."
 msgstr "La clave de API tiene que empezar con sk_test_ o sk_live_."
 
