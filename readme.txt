@@ -2,11 +2,11 @@
 Contributors: fiskit
 Tags: factura electronica, arca, afip, argentina, invoices
 Requires at least: 6.2
-Tested up to: 6.8
+Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 11.2
-Stable tag: 0.1.4
+Stable tag: 0.1.5
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -51,6 +51,10 @@ The plugin retries in the background with the same idempotency key, so the invoi
 Only orders in Argentine pesos (ARS) are invoiced.
 
 == Changelog ==
+
+= 0.1.5 =
+* Tested up to WordPress 7.1.
+* The plugin name stays "FisKit for WooCommerce" in every language.
 
 = 0.1.4 =
 * Plugin URI points to the plugin repository.

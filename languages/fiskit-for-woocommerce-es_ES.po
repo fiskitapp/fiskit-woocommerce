@@ -2,7 +2,7 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: FisKit for WooCommerce 0.1.2\n"
+"Project-Id-Version: FisKit for WooCommerce 0.1.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fiskit-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-11T21:13:20+00:00\n"
+"POT-Creation-Date: 2026-11-11T21:22:43+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: fiskit-for-woocommerce\n"
@@ -19,13 +19,12 @@ msgstr ""
 #. Plugin Name of the plugin
 #: fiskit-for-woocommerce.php
 msgid "FisKit for WooCommerce"
-msgstr "FisKit para WooCommerce"
+msgstr "FisKit for WooCommerce"
 
 #. Plugin URI of the plugin
-#. Author URI of the plugin
 #: fiskit-for-woocommerce.php
-msgid "https://fiskit.com.ar"
-msgstr "https://fiskit.com.ar"
+msgid "https://github.com/fiskitapp/fiskit-woocommerce"
+msgstr "https://github.com/fiskitapp/fiskit-woocommerce"
 
 #. Description of the plugin
 #: fiskit-for-woocommerce.php
@@ -37,11 +36,16 @@ msgstr "Emite la factura electrónica de ARCA (ex AFIP) de cada pedido pagado y 
 msgid "FisKit"
 msgstr "FisKit"
 
-#: fiskit-for-woocommerce.php:52
+#. Author URI of the plugin
+#: fiskit-for-woocommerce.php
+msgid "https://fiskit.com.ar"
+msgstr "https://fiskit.com.ar"
+
+#: fiskit-for-woocommerce.php:55
 msgid "FisKit for WooCommerce needs WooCommerce to be active."
 msgstr "FisKit para WooCommerce necesita que WooCommerce esté activo."
 
-#: fiskit-for-woocommerce.php:87
+#: fiskit-for-woocommerce.php:90
 msgid "Settings"
 msgstr "Ajustes"
 
@@ -246,7 +250,7 @@ msgid "Issue FisKit invoices"
 msgstr "Emitir facturas con FisKit"
 
 #. translators: %d: number of orders.
-#: includes/class-fiskit-orders.php:443
+#: includes/class-fiskit-orders.php:445
 #, php-format
 msgid "%d invoice is being issued in the background."
 msgid_plural "%d invoices are being issued in the background."
@@ -254,115 +258,115 @@ msgstr[0] "Se está emitiendo %d factura en segundo plano."
 msgstr[1] "Se están emitiendo %d facturas en segundo plano."
 
 #. translators: %d: number of orders.
-#: includes/class-fiskit-orders.php:449
+#: includes/class-fiskit-orders.php:451
 #, php-format
 msgid "%d order skipped: already invoiced or not paid."
 msgid_plural "%d orders skipped: already invoiced or not paid."
 msgstr[0] "Se salteó %d pedido: ya facturado o sin pagar."
 msgstr[1] "Se saltearon %d pedidos: ya facturados o sin pagar."
 
-#: includes/class-fiskit-orders.php:465
-#: includes/class-fiskit-orders.php:469
-#: includes/class-fiskit-orders.php:635
-#: includes/class-fiskit-orders.php:657
+#: includes/class-fiskit-orders.php:467
+#: includes/class-fiskit-orders.php:471
+#: includes/class-fiskit-orders.php:637
+#: includes/class-fiskit-orders.php:661
 msgid "Invoice"
 msgstr "Factura"
 
-#: includes/class-fiskit-orders.php:487
-#: includes/class-fiskit-orders.php:594
+#: includes/class-fiskit-orders.php:489
+#: includes/class-fiskit-orders.php:596
 msgid "(test)"
 msgstr "(prueba)"
 
-#: includes/class-fiskit-orders.php:490
+#: includes/class-fiskit-orders.php:492
 msgid "Being issued"
 msgstr "Emitiéndose"
 
-#: includes/class-fiskit-orders.php:495
+#: includes/class-fiskit-orders.php:497
 msgid "Error"
 msgstr "Error"
 
-#: includes/class-fiskit-orders.php:521
+#: includes/class-fiskit-orders.php:523
 msgid "Download your invoice"
 msgstr "Descargá tu factura"
 
-#: includes/class-fiskit-orders.php:539
+#: includes/class-fiskit-orders.php:541
 msgid "ARCA invoice"
 msgstr "Factura de ARCA"
 
-#: includes/class-fiskit-orders.php:567
+#: includes/class-fiskit-orders.php:569
 msgid "Not invoiced yet. It is issued automatically when the order is paid."
 msgstr "Todavía sin facturar. Se emite sola cuando se paga el pedido."
 
-#: includes/class-fiskit-orders.php:567
+#: includes/class-fiskit-orders.php:569
 msgid "Set your FisKit API key in WooCommerce → Settings → Integration."
 msgstr "Cargá tu clave de FisKit en WooCommerce → Ajustes → Integración."
 
-#: includes/class-fiskit-orders.php:571
+#: includes/class-fiskit-orders.php:573
 msgid "Being issued: ARCA is slow to answer."
 msgstr "Emitiéndose: ARCA está tardando en responder."
 
-#: includes/class-fiskit-orders.php:577
+#: includes/class-fiskit-orders.php:579
 msgid "Fix it and choose \"Issue the FisKit invoice\" in the order actions."
 msgstr "Corregilo y elegí \"Emitir la factura con FisKit\" en las acciones del pedido."
 
-#: includes/class-fiskit-orders.php:597
+#: includes/class-fiskit-orders.php:599
 msgid "Download PDF"
 msgstr "Descargar PDF"
 
-#: includes/class-fiskit-orders.php:605
+#: includes/class-fiskit-orders.php:607
 msgid "You are not allowed to see this invoice."
 msgstr "No tenés permiso para ver esta factura."
 
 #. translators: %s: voucher, for example "Invoice C 0001-00000042".
-#: includes/class-fiskit-orders.php:623
+#: includes/class-fiskit-orders.php:625
 #, php-format
 msgid "Download %s"
 msgstr "Descargar %s"
 
-#: includes/class-fiskit-orders.php:651
-#: includes/class-fiskit-orders.php:676
+#: includes/class-fiskit-orders.php:655
+#: includes/class-fiskit-orders.php:680
 msgid "Invoice not found."
 msgstr "Factura no encontrada."
 
-#: includes/class-fiskit-orders.php:656
+#: includes/class-fiskit-orders.php:660
 msgid "Your invoice is still being issued. Try again in a few minutes."
 msgstr "Tu factura todavía se está emitiendo. Probá de nuevo en unos minutos."
 
-#: includes/class-fiskit-orders.php:700
+#: includes/class-fiskit-orders.php:704
 msgid "CUIT or DNI"
 msgstr "CUIT o DNI"
 
-#: includes/class-fiskit-orders.php:701
+#: includes/class-fiskit-orders.php:705
 msgid "Optional, for the invoice"
 msgstr "Opcional, para la factura"
 
-#: includes/class-fiskit-orders.php:733
-#: includes/class-fiskit-orders.php:734
+#: includes/class-fiskit-orders.php:737
+#: includes/class-fiskit-orders.php:738
 msgid "CUIT or DNI (optional, for the invoice)"
 msgstr "CUIT o DNI (opcional, para la factura)"
 
-#: includes/class-fiskit-orders.php:754
+#: includes/class-fiskit-orders.php:758
 msgid "Enter a CUIT (11 digits) or a DNI (7 or 8 digits)."
 msgstr "Ingresá un CUIT (11 dígitos) o un DNI (7 u 8 dígitos)."
 
-#: includes/class-fiskit-orders.php:757
+#: includes/class-fiskit-orders.php:761
 msgid "The CUIT is not valid: check its digits."
 msgstr "El CUIT no es válido: revisá los números."
 
 #. translators: %s: letter A, B or C.
-#: includes/class-fiskit-orders.php:784
+#: includes/class-fiskit-orders.php:788
 #, php-format
 msgid "Invoice %s"
 msgstr "Factura %s"
 
 #. translators: %s: letter A, B or C.
-#: includes/class-fiskit-orders.php:786
+#: includes/class-fiskit-orders.php:790
 #, php-format
 msgid "Credit note %s"
 msgstr "Nota de crédito %s"
 
 #. translators: %s: letter A, B or C.
-#: includes/class-fiskit-orders.php:788
+#: includes/class-fiskit-orders.php:792
 #, php-format
 msgid "Debit note %s"
 msgstr "Nota de débito %s"

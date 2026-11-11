@@ -433,11 +433,13 @@ class Fiskit_Orders {
 	}
 
 	public function bulk_notice() {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- display only: two counts set by our own redirect, cast to integers, no action taken
 		if ( ! isset( $_GET['fiskit_queued'] ) ) {
 			return;
 		}
 		$queued  = absint( $_GET['fiskit_queued'] );
 		$skipped = isset( $_GET['fiskit_skipped'] ) ? absint( $_GET['fiskit_skipped'] ) : 0;
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 		$message = sprintf(
 			/* translators: %d: number of orders. */
 			_n( '%d invoice is being issued in the background.', '%d invoices are being issued in the background.', $queued, 'fiskit-for-woocommerce' ),
@@ -642,11 +644,13 @@ class Fiskit_Orders {
 	 * Serves the PDF to whoever has the order key: the same secret WooCommerce uses for its order links.
 	 */
 	public function customer_pdf() {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- a link sent by email cannot carry a nonce; access is granted by the order key, the same secret WooCommerce uses for its own order links, compared with hash_equals
 		if ( empty( $_GET['fiskit_invoice'] ) || empty( $_GET['key'] ) ) {
 			return;
 		}
 		$order = wc_get_order( absint( $_GET['fiskit_invoice'] ) );
 		$key   = sanitize_text_field( wp_unslash( $_GET['key'] ) );
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 		if ( ! $order || ! $order instanceof WC_Order || ! hash_equals( $order->get_order_key(), $key ) ) {
 			wp_die( esc_html__( 'Invoice not found.', 'fiskit-for-woocommerce' ), 404 );
 		}
