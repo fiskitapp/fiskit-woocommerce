@@ -13,7 +13,7 @@ Issues the ARCA (formerly AFIP) electronic invoice of every paid WooCommerce ord
 
 ## Install
 
-1. Download `fiskit-for-woocommerce.zip` from the [latest release](https://github.com/FidelGenre/fiskit-woocommerce/releases/latest).
+1. Download `fiskit-for-woocommerce.zip` from the [latest release](https://github.com/fiskitapp/fiskit-woocommerce/releases/latest).
 2. In WordPress: Plugins → Add New → Upload Plugin, choose the zip and activate it.
 3. WooCommerce → Settings → Integration → FisKit: paste your API key (from the FisKit dashboard, API Keys) and pick your tax status.
 
@@ -36,7 +36,7 @@ Emite la factura electrónica de ARCA (ex AFIP) de cada pedido pagado de WooComm
 
 **Instalación:**
 
-1. Descargá `fiskit-for-woocommerce.zip` de la [última versión](https://github.com/FidelGenre/fiskit-woocommerce/releases/latest).
+1. Descargá `fiskit-for-woocommerce.zip` de la [última versión](https://github.com/fiskitapp/fiskit-woocommerce/releases/latest).
 2. En WordPress: Plugins → Añadir nuevo → Subir plugin, elegí el zip y activalo.
 3. WooCommerce → Ajustes → Integración → FisKit: pegá tu clave de API (del panel de FisKit, en Claves de API) y elegí tu condición fiscal.
 

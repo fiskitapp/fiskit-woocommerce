@@ -1,4 +1,4 @@
-# Runs in the public repository (FidelGenre/fiskit-woocommerce), which receives this folder as a mirror.
+# Runs in the public repository (fiskitapp/fiskit-woocommerce), which receives this folder as a mirror.
 # Every version tag (v0.1.0...) gets a release with the installable zip: Plugins → Add New → Upload Plugin.
 name: Release
 
