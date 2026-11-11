@@ -79,7 +79,9 @@ class Fiskit_Orders {
 	 */
 	public function on_status( $order_id ) {
 		$order = wc_get_order( $order_id );
-		if ( ! $order || ! $this->active() || ! $order->has_status( $this->settings->get_option( 'trigger' ) ) ) {
+		// "Paid" also covers orders completed straight away, without going through processing
+		$statuses = 'completed' === $this->settings->get_option( 'trigger' ) ? array( 'completed' ) : array( 'processing', 'completed' );
+		if ( ! $order || ! $this->active() || ! $order->has_status( $statuses ) ) {
 			return;
 		}
 		if ( in_array( $order->get_meta( self::META_STATUS ), array( 'authorized', 'pending' ), true ) ) {

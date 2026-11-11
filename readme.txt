@@ -56,6 +56,7 @@ Only orders in Argentine pesos (ARS) are invoiced.
 * The API key is checked when the settings are saved, and the connection mode (test or live) is shown.
 * The VAT rate is only shown to registered VAT taxpayers.
 * Notice about not connecting Mercado Pago in FisKit as well, to avoid invoicing twice.
+* Orders marked as completed without going through processing are invoiced too.
 
 = 0.1.1 =
 * The plugin now lives in the fiskitapp organization on GitHub.
