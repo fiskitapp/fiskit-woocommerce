@@ -3,7 +3,7 @@
  * Plugin Name:          FisKit for WooCommerce
  * Plugin URI:           https://github.com/fiskitapp/fiskit-woocommerce
  * Description:          Issues the ARCA (ex AFIP) electronic invoice of every paid order and a credit note for every refund. The customer gets the PDF by email.
- * Version:              0.1.5
+ * Version:              0.1.6
  * Requires at least:    6.2
  * Requires PHP:         7.4
  * Requires Plugins:     woocommerce
@@ -21,7 +21,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FISKIT_WC_VERSION', '0.1.5' );
+define( 'FISKIT_WC_VERSION', '0.1.6' );
 define( 'FISKIT_WC_FILE', __FILE__ );
 
 // Compatible with High-Performance Order Storage and with the block checkout
@@ -36,22 +36,17 @@ add_action(
 );
 
 add_action(
-	'init',
-	function () {
-		// Loads the translations bundled in /languages, for sites that install the zip from GitHub instead
-		// of the WordPress.org directory (which serves its own translations).
-		// phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound
-		load_plugin_textdomain( 'fiskit-for-woocommerce', false, dirname( plugin_basename( FISKIT_WC_FILE ) ) . '/languages' );
-	}
-);
-
-add_action(
 	'plugins_loaded',
 	function () {
 		if ( ! class_exists( 'WC_Integration' ) ) {
 			add_action(
 				'admin_notices',
 				function () {
+					// Only on the plugins screen, where it can be acted on
+					$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+					if ( ! $screen || 'plugins' !== $screen->id ) {
+						return;
+					}
 					echo '<div class="notice notice-error"><p>' . esc_html__( 'FisKit for WooCommerce needs WooCommerce to be active.', 'fiskit-for-woocommerce' ) . '</p></div>';
 				}
 			);

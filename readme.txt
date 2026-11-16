@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 11.2
-Stable tag: 0.1.5
+Stable tag: 0.1.6
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -23,10 +23,6 @@ FisKit for WooCommerce invoices every paid order with ARCA (formerly AFIP), Arge
 * Works with the classic and the block checkout, and with High-Performance Order Storage.
 
 Emite la factura electrónica de ARCA de cada pedido pagado y la nota de crédito de cada reembolso. El cliente recibe el PDF por email.
-
-= External service =
-
-This plugin sends the order data needed for the invoice (amounts, items, and the customer's name, address, email and CUIT or DNI when given) to the FisKit API at https://api.fiskit.com.ar, which issues it with ARCA. It only does so when an API key is set. More about the service at https://fiskit.com.ar.
 
 == Installation ==
 
@@ -50,7 +46,29 @@ The plugin retries in the background with the same idempotency key, so the invoi
 
 Only orders in Argentine pesos (ARS) are invoiced.
 
+== External services ==
+
+This plugin relies on the FisKit API (https://api.fiskit.com.ar), an electronic invoicing service provided by FisKit (https://fiskit.com.ar). FisKit issues the invoices and credit notes with ARCA, Argentina's tax agency, which the plugin cannot do on its own. Nothing is sent until you enter a FisKit API key in the settings.
+
+What is sent, and when:
+
+* When you save the settings: your API key, to check that it is valid and whether it is in test or live mode.
+* When an order is paid (processing or completed), or when you issue its invoice from the order screen or the bulk action: the order amounts and items, and the customer's name, address and CUIT or DNI when given, so FisKit can issue the invoice. The customer's email is sent too when the option to email the invoice is on, so FisKit can send them the PDF.
+* When an order is refunded: the refund amount and reason, the same customer data and the number of the original invoice, to issue the credit note.
+* At checkout, when the customer enters a CUIT for an Invoice A (registered VAT taxpayers only): that CUIT, to check it against the ARCA taxpayer registry.
+* When you or the customer open an invoice PDF, and while an invoice is pending: the invoice ID, to fetch its PDF or its status.
+
+Every request carries your API key. Requests made with an sk_test_ key go to ARCA's testing environment and have no fiscal validity.
+
+FisKit terms of service: https://fiskit.com.ar/terms
+FisKit privacy policy: https://fiskit.com.ar/privacy
+
 == Changelog ==
+
+= 0.1.6 =
+* Translations are served by translate.wordpress.org instead of being bundled.
+* External services documented in this readme.
+* The notice shown when WooCommerce is not active only appears on the Plugins screen.
 
 = 0.1.5 =
 * Tested up to WordPress 7.1.
